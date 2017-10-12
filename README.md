@@ -1,13 +1,26 @@
+
+
 # Overview
-This repository contains all the code needed to complete the final project for the Localization course in Udacity's Self-Driving Car Nanodegree.
+This repository contains all the code needed to complete the final project for the Localization course in Udacity's Self-Driving Car Nanodegree. I am using a simulator to model the Particle Filter algorithm in a virtual environment.
 
-#### Submission
-All you will submit is your completed version of `particle_filter.cpp`, which is located in the `src` directory. You should probably do a `git pull` before submitting to verify that your project passes the most up-to-date version of the grading code (there are some parameters in `src/main.cpp` which govern the requirements on accuracy and run time.)
+## Project Summary
+My robot has been kidnapped and transported to a new location! Luckily it has a map of this location, a (noisy) GPS estimate of its initial location, and lots of (noisy) sensor and control data.
 
-## Project Introduction
-Your robot has been kidnapped and transported to a new location! Luckily it has a map of this location, a (noisy) GPS estimate of its initial location, and lots of (noisy) sensor and control data.
+In this project I have implemented a 2 dimensional particle filter in C++. My particle filter is given a map and some initial localization information (analogous to what a GPS would provide). At each time step my filter also gets observation and control data. 
+The observation data includes Lidar or Radar data, which are sensor measurements of distances from the car to nearby landmarks
+The control data consists of data taken from sensors on the car which give noisy information about the velocity and the angle at which the car has moved.
 
-In this project you will implement a 2 dimensional particle filter in C++. Your particle filter will be given a map and some initial localization information (analogous to what a GPS would provide). At each time step your filter will also get observation and control data. 
+
+These are the complete steps I have implemented:
+
+1. Initialize 100 particles using a normal distribution centered at the obtained GPS positions and theta angles.
+2. At each time step, update the the particles position and angle, with some noise, using the control data from the simulator.
+3. For each observation measurement, rotate and translate the measurement from the car to each particle.
+4. Use each of these observations with respect to each particle along with the distance from the particle to the landmarks, to find the likelihood that the observations were taken from that particular particle. This is used to find importance of the particle or the weight of the particle. The closer the particle will be to the actual position of the car, the higher will its weight be.
+5. Use resampling to select 100 paricles, allowing repetition, giving importance to the weights of the particles, where higher weighted particles are more likely to be selected.
+6. Repeat steps 2-5 over and over again to localize the particle within the map.
+
+
 
 ## Running the Code
 This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
