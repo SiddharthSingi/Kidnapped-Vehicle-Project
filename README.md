@@ -21,6 +21,11 @@ These are the complete steps I have implemented:
 6. Repeat steps 2-5 over and over again to localize the particle within the map.
 
 
+This is a snippet from the simulator:
+![screenshot 162](https://user-images.githubusercontent.com/26694585/31503626-d25cd96c-af8d-11e7-89b0-29e7ffae0bcf.png)
+The car represents the ground truth position, and bearing of the car and the blue circle with the arrow shows the position, and bearing estimated by the particle filter algorithm. Each green line shows measurement from the car to nearby landmarks.
+
+Here is the video of the simulator being run: Youtube.
 
 ## Running the Code
 This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
